@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Contraseñas Temáticas</title>
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Hojas de estilo personalizadas -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="tematic.css">
+</head>
+<body>
+    <!-- Modal Structure -->
+    <div id="consentModal" class="modal">
+        <div class="modal-content center-align">
+            <h4><i class="material-icons medium">waving_hand</i> ¡Hola humano!</h4>
+            <p><i class="material-icons">psychology</i> Vas a generar contraseñas con la tecnología de OpenAI.</p>
+            <p><i class="material-icons">help_outline</i> ¿Estás de acuerdo?</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="modalAccept">Aceptar</a>
+            <a href="/" class="modal-close waves-effect waves-red btn-flat" id="modalCancel">Cancelar</a>
+        </div>
+    </div>
+
+    <!-- Navbar Dropdown Menu -->
+    <nav class="blue darken-3">
+        <div class="nav-wrapper container">
+            <ul class="right">
+                <li><a href="/">Generador Clásico</a></li>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown-proyectos">
+                    Otros Proyectos<i class="material-icons right">arrow_drop_down</i>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Dropdown Structure -->
+    <ul id="dropdown-proyectos" class="dropdown-content">
+        <li><a href="https://www.ghu.life" target="_blank">GHU</a></li>
+    </ul>
+
+    <main class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="card-panel">
+                    <h4 class="center-align">Generador de Contraseñas Temáticas</h4>
+                    <div id="tema-container" class="input-field">
+                        <label for="tema">Ingrese un tema</label>
+                        <input type="text" id="tema" placeholder="Ejemplo: Tecnología">
+                    </div>
+                    <div class="button-container">
+                        <button class="btn waves-effect waves-light blue darken-3" onclick="generateTematicPassword()">Generar Contraseña
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                    <div class="input-field">
+                        <textarea id="result" class="materialize-textarea" readonly onclick="copyPassword()"></textarea>
+                        <label for="result">Contraseña generada (haz clic para copiar)</label>
+                    </div>
+                    <div class="button-container">
+                        <button class="btn waves-effect waves-light green" onclick="copyPassword()">Copiar Contraseña
+                            <i class="material-icons right">content_copy</i>
+                        </button>
+                    </div>
+                    <div id="entropia-container">
+                        <span>Entropía: </span><span id="entropia-valor"></span>
+                    </div>
+                    <div id="seguridad-container">
+                        <span>Seguridad: </span><span id="seguridad-valor"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón para volver al generador principal -->
+        <div class="return-button">
+            <a href="/" class="btn-large waves-effect waves-light blue darken-2">
+                <i class="material-icons left">arrow_back</i>
+                Volver al Generador Clásico
+            </a>
+        </div>
+    </main>
+
+    <div id="copyMessage">Contraseña copiada</div>
+
+    <footer class="page-footer">
+        <div class="container">
+            Genera Contraseñas y Contraseñas Seguras con ❤️ por 00B en 2024
+        </div>
+    </footer>
+
+    <!-- Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="tematic-script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar dropdown
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(elems, {
+                coverTrigger: false,
+                constrainWidth: false
+            });
+
+            // Inicializar el modal
+            var modal = M.Modal.init(document.getElementById('consentModal'), {
+                dismissible: false, // Previene que el modal se cierre al hacer clic fuera de él
+                onCloseEnd: function() {
+                    // Si el modal se cierra sin aceptar, redirigir a index.html
+                    if (!window.modalAccepted) {
+                        window.location.href = '/';
+                    }
+                }
+            });
+
+            // Verificar si ya se ha aceptado
+            if (!sessionStorage.getItem('modalAccepted')) {
+                modal.open();
+            }
+
+            // Manejar el clic en "Aceptar"
+            document.getElementById('modalAccept').addEventListener('click', function() {
+                window.modalAccepted = true;
+                sessionStorage.setItem('modalAccepted', 'true');
+                modal.close();
+            });
+
+            // Manejar el clic en "Cancelar"
+            document.getElementById('modalCancel').addEventListener('click', function() {
+                window.location.href = '/';
+            });
+        });
+    </script>
+</body>
+</html>

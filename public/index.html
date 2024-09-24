@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Contraseñas Seguras</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <body>
+        <nav class="blue darken-3">
+            <div class="nav-wrapper container">
+                <ul class="left">
+                    <li>
+                        <div class="dark-mode-switch">
+                            <div class="switch">
+                                <label>
+                                    <input type="checkbox" id="darkModeToggle">
+                                    <span class="lever"></span>
+                                    <i class="material-icons">brightness_4</i>
+                                </label>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="right">
+                    <li><a href="/">Generador Clásico</a></li>
+                    <li><a href="/tematic">Generar con IA</a></li>
+                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown-proyectos">
+                        Otros Proyectos<i class="material-icons right">arrow_drop_down</i>
+                    </a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Dropdown Structure -->
+        <ul id="dropdown-proyectos" class="dropdown-content">
+            <li><a href="https://www.ghu.life" target="_blank">GHU</a></li>
+        </ul>
+        <div class="language-selector">
+            <a href="index.html" id="es-lang">ES</a>
+            <a href="index_eng.html" id="en-lang">ENG</a>
+        </div>
+
+    
+
+   
+
+    
+
+    <div class="container">
+        <h1 id="generador-de-contraseñas-seguras" class="center-align blue-text text-darken-2">Generador de Contraseñas Seguras</h1>
+
+        <!-- Nuevo botón para generar contraseñas temáticas -->
+        <div class="tematic-password-button center-align">
+            <a href="/tematic" class="btn-large waves-effect waves-light blue darken-2">
+                <i class="material-icons left">psychology</i>
+                Generar contraseñas temáticas con IA
+            </a>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <div class="card-panel wide-card">
+                    <h2 class="center-align blue-text text-darken-2">
+                        <i class="material-icons">lock</i> ¿Cómo quieres generar la contraseña? <i class="material-icons">lock</i>
+                    </h2>
+
+                    <div class="row">
+                        <div class="col s12 input-field">
+                            <input type="number" id="length" name="length" min="14" value="14" onchange="updateLengthValue(this.value)">
+                            <label for="length" class="password-length-label">Longitud de la Contraseña:</label>
+                            <span id="length-warning" class="warning-text" style="display: none;"></span>
+                        </div>
+                    </div>
+
+                    <div class="row switch-align-left">
+                        <div class="col s12 switch">
+                            <label>
+                                <input type="checkbox" id="lowercase" checked onclick="toggleOtherOptions('lowercase')">
+                                <span class="lever blue darken-2"></span>
+                                Minúsculas (a-z)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row switch-align-left">
+                        <div class="col s12 switch">
+                            <label>
+                                <input type="checkbox" id="uppercase" checked onclick="toggleOtherOptions('uppercase')">
+                                <span class="lever blue darken-2"></span>
+                                Mayúsculas (A-Z)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row switch-align-left">
+                        <div class="col s12 switch">
+                            <label>
+                                <input type="checkbox" id="numbers" checked onclick="toggleOtherOptions('numbers')">
+                                <span class="lever blue darken-2"></span>
+                                Números (0-9)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row switch-align-left">
+                        <div class="col s12 switch">
+                            <label>
+                                <input type="checkbox" id="symbols" onclick="toggleOtherOptions('symbols')">
+                                <span class="lever blue darken-2"></span>
+                                Símbolos (!@#$%^&*)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row switch-align-left">
+                        <div class="col s12 switch">
+                            <label>
+                                <input type="checkbox" id="brackets" onclick="toggleOtherOptions('brackets')">
+                                <span class="lever blue darken-2"></span>
+                                Paréntesis ([]{}())
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row switch-align-left">
+                        <div class="col s12 switch">
+                            <label>
+                                <input type="checkbox" id="high-ansi" onclick="toggleOtherOptions('high-ansi')">
+                                <span class="lever blue darken-2"></span>
+                                Caracteres ANSI altos (±¥µç)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row switch-align-left">
+                        <div class="col s12 switch">
+                            <label>
+                                <input type="checkbox" id="words">
+                                <span class="lever blue darken-2"></span>
+                                Palabras (ej., parturición-=-quirográfico-=-tricentenarios)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="word-options-row" style="display:none;">
+                        <div class="row">
+                            <div class="col s12 input-field">
+                                <input type="number" id="word-count" name="word-count" min="3" max="10" value="3">
+                                <label for="word-count">Número de Palabras</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 input-field">
+                                <select id="language-select">
+                            
+                                    <option value="es">🇪🇸 Español</option>
+                                </select>
+                                <label>Elige idioma</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <div class="card-panel wide-card">
+                    <h2 class="center-align blue-text text-darken-2">
+                        <i class="material-icons">mouse</i> Mueve el ratón para generar la contraseña
+                    </h2>
+                    <div id="password-generator-area" class="password-generator-area" aria-live="polite">
+                        <ul>
+                            <li><i class="material-icons">sync</i> Mueve el ratón dentro del cuadro para generar la contraseña</li>
+                            <li><i class="material-icons">content_copy</i> Haz clic en el cuadro para copiar la contraseña al portapapeles</li>
+                        </ul>
+                    </div>
+                    <div id="generated-password" class="generated-password-text center-align"></div>
+                    <div class="password-info">
+                        <div class="password-stats-container">
+                            <div class="entropy-container">
+                                <span class="entropy-label">Entropía:</span>
+                                <span id="entropia-valor"></span>
+                            </div>
+                            <div class="crack-time-container">
+                                <span class="crack-time-label">Tiempo estimado de craqueo:</span>
+                                <span id="tiempo-craqueo"></span>
+                            </div>
+                            <div class="strength-container">
+                                <span class="strength-label">Fortaleza:</span>
+                                <span id="fortaleza-valor"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bloque del contador de contraseñas simplificado -->
+        <div class="row">
+            <div class="col s12">
+                <div class="card-panel wide-card">
+                    <h3 class="center-align blue-text text-darken-2">Hall of fame</h3>
+                    <div id="counter-container" class="center-align">
+                        <p class="flow-text">Total de contraseñas generadas: <span id="password-counter">0</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <div class="card-panel wide-card">
+                    <div class="row center-align">
+                        <div class="col s12">
+                            <button id="copy-button" class="btn blue darken-2 waves-effect waves-light">
+                                <i class="material-icons left">content_copy</i>COPIAR CONTRASEÑA
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row center-align">
+                        <div class="col s12">
+                            <button id="generate-button" class="btn blue darken-2 waves-effect waves-light">
+                                <i class="material-icons left">refresh</i>GENERAR CONTRASEÑA
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="que-es-entropia" class="row">
+            <div class="col s12">
+                <div class="card-panel wide-card">
+                    <h3 class="center-align blue-text text-darken-2">¿Qué es la entropía de una contraseña?</h3>
+                    <p>La entropía de una contraseña es una medida de su fortaleza o imprevisibilidad. En el contexto de la seguridad informática, la entropía se expresa en bits y representa la cantidad de información o aleatoriedad contenida en una contraseña.</p>
+                    <p>Una contraseña con alta entropía es más difícil de adivinar o descifrar mediante ataques de fuerza bruta o de diccionario. La entropía se calcula utilizando la siguiente fórmula:</p>
+                    <div class="formula">
+                        <p><strong>E = L * log<sub>2</sub>(R)</strong></p>
+                        <p>Donde:</p>
+                        <ul>
+                            <li><strong>E</strong> es la entropía en bits</li>
+                            <li><strong>L</strong> es la longitud de la contraseña</li>
+                            <li><strong>R</strong> es el tamaño del conjunto de caracteres posibles</li>
+                        </ul>
+                    </div>
+                    <p>Por ejemplo, para una contraseña de 8 caracteres que utiliza letras minúsculas y mayúsculas (52 caracteres) y números (10 caracteres), el cálculo sería:</p>
+                    <div class="formula">
+                        <p>E = 8 * log<sub>2</sub>(62) ≈ 47.6 bits</p>
+                    </div>
+                    <p>En el caso de contraseñas basadas en palabras, el cálculo es ligeramente diferente. Se utiliza el tamaño del diccionario en lugar del conjunto de caracteres:</p>
+                    <div class="formula">
+                        <p><strong>E = N * log<sub>2</sub>(D)</strong></p>
+                        <p>Donde:</p>
+                        <ul>
+                            <li><strong>N</strong> es el número de palabras en la contraseña</li>
+                            <li><strong>D</strong> es el tamaño del diccionario</li>
+                        </ul>
+                    </div>
+                    <p>Una mayor entropía indica una contraseña más segura. En general, se recomienda una entropía mínima de 60 bits para una seguridad adecuada, aunque para información altamente sensible, se pueden requerir valores más altos.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="que-es-fuerza-bruta" class="row">
+            <div class="col s12">
+                <div class="card-panel wide-card">
+                    <h3 class="center-align blue-text text-darken-2">¿Qué es la fuerza bruta y sus variantes?</h3>
+                    <h4><i class="material-icons">security</i> Ataque de fuerza bruta</h4>
+                    <p>Un ataque de fuerza bruta es un método de descifrado de contraseñas que consiste en probar sistemáticamente todas las combinaciones posibles de caracteres hasta encontrar la correcta. Aunque es un método garantizado para encontrar cualquier contraseña, puede ser extremadamente lento para contraseñas largas y complejas.</p>
+                    <h4><i class="material-icons">content_paste</i> Credential Stuffing</h4>
+                    <p>El credential stuffing es una técnica que utiliza pares de nombres de usuario y contraseñas filtrados de una brecha de seguridad para intentar acceder a otras cuentas. Este método explota la tendencia de los usuarios a reutilizar las mismas credenciales en múltiples sitios.</p>
+                    <h4><i class="material-icons">book</i> Ataque de diccionario</h4>
+                    <p>Un ataque de diccionario utiliza una lista predefinida de palabras y frases comunes para intentar adivinar la contraseña. Es más rápido que la fuerza bruta pura, pero menos exhaustivo. Es especialmente efectivo contra contraseñas que utilizan palabras comunes.</p>
+                    <h4><i class="material-icons">shuffle</i> Ataques híbridos de fuerza bruta</h4>
+                    <p>Los ataques híbridos combinan elementos de los ataques de diccionario y de fuerza bruta. Pueden comenzar con palabras de un diccionario y luego aplicar transformaciones comunes (como añadir números al final) o combinar palabras del diccionario con secuencias de caracteres generadas por fuerza bruta.</p>
+                    <h4><i class="material-icons">flip_to_back</i> Ataques de fuerza bruta inversos</h4>
+                    <p>En lugar de intentar descifrar una contraseña específica, los ataques de fuerza bruta inversos generan hashes de contraseñas comunes y los comparan con una base de datos de hashes robados. Este método es eficaz para descifrar múltiples contraseñas simultáneamente si se tiene acceso a una base de datos de hashes.</p>
+                    <h4><i class="material-icons">memory</i> Aceleración de fuerza bruta por GPU</h4>
+                    <p>La aceleración por GPU utiliza el poder de procesamiento de las tarjetas gráficas para realizar ataques de fuerza bruta mucho más rápidamente que con CPUs tradicionales. Las GPUs son particularmente eficientes en realizar múltiples cálculos simples en paralelo, lo que las hace ideales para probar un gran número de combinaciones de contraseñas rápidamente.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="consejos-crear-contraseñas" class="row">
+            <div class="col s12">
+                <div class="card-panel wide-card">
+                    <h3 class="center-align blue-text text-darken-2">Consejos para Crear Contraseñas Seguras</h3>
+                    <ul>
+                        <li><i class="material-icons">text_fields</i> Usa una combinación de letras mayúsculas y minúsculas.</li>
+                        <li><i class="material-icons">dialpad</i> Incluye números y símbolos.</li>
+                        <li><i class="material-icons">person_outline</i> Evita usar información personal como fechas de nacimiento o nombres.</li>
+                        <li><i class="material-icons">block</i> No reutilices contraseñas en diferentes sitios web.</li>
+                        <li><i class="material-icons">update</i> Cambia tus contraseñas regularmente.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row center-align">
+            <div class="col s12">
+                <a href="https://es.wikipedia.org/wiki/Seguridad_de_contrase%C3%B1a" class="blue-text text-darken-2" target="_blank">Ir al artículo sobre Seguridad de Contraseñas</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification" style="display: none;">
+        ¡Contraseña copiada al portapapeles!
+    </div>
+
+    <footer class="page-footer">
+        <div class="container">
+            Genera Contraseñas y Contraseñas Seguras con ❤️ por 00B en 2024
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="script.js"></script>
+    <script src="entropia.js"></script>
+        <script src="modoNoche.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var dropdowns = document.querySelectorAll('.dropdown-trigger');
+            var dropdownInstances = M.Dropdown.init(dropdowns, {
+                coverTrigger: false,
+                constrainWidth: false
+            });
+        });
+    </script>
+</body>
+</html>

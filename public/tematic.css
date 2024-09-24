@@ -1,0 +1,176 @@
+/* Estilos generales */
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1 0 auto;
+    padding-bottom: 50px; /* Añade espacio en la parte inferior */
+}
+
+/* Estilos para el navbar */
+nav {
+    box-shadow: none;
+}
+
+.dropdown-content {
+    width: auto !important;
+}
+
+.dropdown-content li > a {
+    color: #1565c0;
+}
+
+/* Estilos para el card principal */
+.card-panel {
+    width: 90%;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 20px;
+}
+
+/* Estilos para el resultado */
+#result {
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
+    font-weight: bold;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+/* Estilos para el contenedor del tema */
+#tema-container label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+#tema-container input {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* Estilos para los botones */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.button-container .btn {
+    margin: 0 10px;
+}
+
+/* Estilos para la información de entropía y seguridad */
+#entropia-container, #seguridad-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#entropia-valor, #seguridad-valor {
+    font-weight: bold;
+}
+
+/* Clases de seguridad */
+.seguridad-muy-debil { color: #ff0000; }
+.seguridad-debil { color: #ff6600; }
+.seguridad-razonable { color: #ffcc00; }
+.seguridad-fuerte { color: #00cc00; }
+.seguridad-muy-fuerte { color: #009900; }
+
+/* Estilos para el mensaje de copiado */
+#copyMessage {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+/* Estilos para el botón de retorno */
+.return-button {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.return-button .btn-large {
+    font-size: 16px;
+}
+
+/* Estilos para el footer */
+.page-footer {
+    background-color: #1565c0;
+    color: white;
+    padding: 16px 0;
+    margin-top: 32px;
+    text-align: center;
+}
+
+/* Media queries para responsividad */
+@media only screen and (max-width: 600px) {
+    .card-panel {
+        width: 95%;
+        padding: 15px;
+    }
+
+    #tema-container label, #tema-container input {
+        font-size: 14px;
+    }
+
+    .button-container .btn {
+        font-size: 14px;
+    }
+
+    .return-button .btn-large {
+        font-size: 14px;
+    }
+}
+/* Estilos para el modal */
+.modal {
+    width: 90%;
+    max-width: 500px;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+
+.modal .modal-content {
+    padding-bottom: 0;
+}
+
+.modal h4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal h4 .material-icons {
+    margin-right: 10px;
+}
+
+.modal p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal p .material-icons {
+    margin-right: 10px;
+}
+
+.modal .modal-footer {
+    text-align: center;
+    padding: 4px 20px 20px;
+}
+
+.modal .modal-footer .btn-flat {
+    margin: 0 10px;
+}
