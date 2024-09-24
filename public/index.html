@@ -9,57 +9,44 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <body>
-        <nav class="blue darken-3">
-            <div class="nav-wrapper container">
-                <ul class="left">
-                    <li>
-                        <div class="dark-mode-switch">
-                            <div class="switch">
-                                <label>
-                                    <input type="checkbox" id="darkModeToggle">
-                                    <span class="lever"></span>
-                                    <i class="material-icons">brightness_4</i>
-                                </label>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="right">
-                    <li><a href="/">Generador Clásico</a></li>
-                    <li><a href="/tematic">Generar con IA</a></li>
-                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown-proyectos">
-                        Otros Proyectos<i class="material-icons right">arrow_drop_down</i>
-                    </a></li>
-                </ul>
+    <nav class="blue darken-3">
+        <div class="nav-wrapper container">
+            <div class="language-selector left">
+                <a href="index.html" id="es-lang">ES</a>
+                <a href="index_eng.html" id="en-lang">ENG</a>
             </div>
-        </nav>
-
-        <!-- Dropdown Structure -->
-        <ul id="dropdown-proyectos" class="dropdown-content">
-            <li><a href="https://www.ghu.life" target="_blank">GHU</a></li>
-        </ul>
-        <div class="language-selector">
-            <a href="index.html" id="es-lang">ES</a>
-            <a href="index_eng.html" id="en-lang">ENG</a>
+            <ul class="left hide-on-med-and-down">
+                <li><a href="/">Generador Clásico</a></li>
+                <li><a href="/tematic.html">Generador IA</a></li>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown-proyectos">
+                    Otros Proyectos<i class="material-icons right">arrow_drop_down</i>
+                </a></li>
+            </ul>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
         </div>
-
-    
-
-   
-
-    
-
+    </nav>
+    <!-- Menú móvil -->
+    <ul class="sidenav" id="mobile-demo">
+        <li><div class="language-selector">
+            <a href="index.html" id="es-lang-mobile">ES</a>
+            <a href="index_eng.html" id="en-lang-mobile">ENG</a>
+        </div></li>
+        <li><a href="/">Generador Clásico</a></li>
+        <li><a href="/tematic.html">Generador IA</a></li>
+        <li><a class="dropdown-trigger" href="#!" data-target="dropdown-proyectos-mobile">
+            Otros Proyectos<i class="material-icons right">arrow_drop_down</i>
+        </a></li>
+    </ul>
+    <!-- Dropdown Structure -->
+    <ul id="dropdown-proyectos" class="dropdown-content">
+        <li><a href="https://www.ghu.life" target="_blank">GHU</a></li>
+    </ul>
+    <!-- Dropdown Structure para móvil -->
+    <ul id="dropdown-proyectos-mobile" class="dropdown-content">
+        <li><a href="https://www.ghu.life" target="_blank">GHU</a></li>
+    </ul>
     <div class="container">
         <h1 id="generador-de-contraseñas-seguras" class="center-align blue-text text-darken-2">Generador de Contraseñas Seguras</h1>
-
-        <!-- Nuevo botón para generar contraseñas temáticas -->
-        <div class="tematic-password-button center-align">
-            <a href="/tematic" class="btn-large waves-effect waves-light blue darken-2">
-                <i class="material-icons left">psychology</i>
-                Generar contraseñas temáticas con IA
-            </a>
-        </div>
 
         <div class="row">
             <div class="col s12">
@@ -131,7 +118,7 @@
                             <label>
                                 <input type="checkbox" id="high-ansi" onclick="toggleOtherOptions('high-ansi')">
                                 <span class="lever blue darken-2"></span>
-                                Caracteres ANSI altos (±¥µç)
+                                Caracteres ANSI altos (±¥µç|~¬<>¿?)
                             </label>
                         </div>
                     </div>
@@ -156,10 +143,9 @@
                         <div class="row">
                             <div class="col s12 input-field">
                                 <select id="language-select">
-                            
-                                    <option value="es">🇪🇸 Español</option>
+                                    <!-- Se llenará dinámicamente con JavaScript -->
                                 </select>
-                                <label>Elige idioma</label>
+                                <label>Elige idioma para las palabras</label>
                             </div>
                         </div>
                     </div>
@@ -204,7 +190,7 @@
         <div class="row">
             <div class="col s12">
                 <div class="card-panel wide-card">
-                    <h3 class="center-align blue-text text-darken-2">Hall of fame</h3>
+                    <h3 class="center-align blue-text text-darken-2">Hall of fame 🤩</h3>
                     <div id="counter-container" class="center-align">
                         <p class="flow-text">Total de contraseñas generadas: <span id="password-counter">0</span></p>
                     </div>
@@ -321,14 +307,39 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="script.js"></script>
     <script src="entropia.js"></script>
-        <script src="modoNoche.js"></script>
+    <script src="palabras.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Inicialización de componentes de Materialize
+            M.AutoInit();
+
+            // Inicialización del sidenav
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, {edge: 'right'});
+
+            // Inicialización de los dropdowns
             var dropdowns = document.querySelectorAll('.dropdown-trigger');
             var dropdownInstances = M.Dropdown.init(dropdowns, {
                 coverTrigger: false,
                 constrainWidth: false
             });
+
+            // Llenar el selector de idiomas
+            try {
+                const idiomas = await obtenerIdiomasDisponibles();
+                const selectIdioma = document.getElementById('language-select');
+                idiomas.forEach(idioma => {
+                    const option = document.createElement('option');
+                    option.value = idioma;
+                    option.textContent = idioma.toUpperCase();
+                    selectIdioma.appendChild(option);
+                });
+                // Reinicializar el select de Materialize después de llenarlo
+                M.FormSelect.init(selectIdioma);
+            } catch (error) {
+                console.error('Error al cargar los idiomas:', error);
+                // Manejar el error en la interfaz de usuario si es necesario
+            }
         });
     </script>
 </body>

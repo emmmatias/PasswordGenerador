@@ -1,47 +1,50 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de Contraseñas Temáticas</title>
-    <!-- Materialize CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Hojas de estilo personalizadas -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="tematic.css">
-</head>
-<body>
-    <!-- Modal Structure -->
-    <div id="consentModal" class="modal">
-        <div class="modal-content center-align">
-            <h4><i class="material-icons medium">waving_hand</i> ¡Hola humano!</h4>
-            <p><i class="material-icons">psychology</i> Vas a generar contraseñas con la tecnología de OpenAI.</p>
-            <p><i class="material-icons">help_outline</i> ¿Estás de acuerdo?</p>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="modalAccept">Aceptar</a>
-            <a href="/" class="modal-close waves-effect waves-red btn-flat" id="modalCancel">Cancelar</a>
-        </div>
-    </div>
-
-    <!-- Navbar Dropdown Menu -->
-    <nav class="blue darken-3">
-        <div class="nav-wrapper container">
-            <ul class="right">
-                <li><a href="/">Generador Clásico</a></li>
-                <li><a class="dropdown-trigger" href="#!" data-target="dropdown-proyectos">
-                    Otros Proyectos<i class="material-icons right">arrow_drop_down</i>
-                </a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Dropdown Structure -->
-    <ul id="dropdown-proyectos" class="dropdown-content">
-        <li><a href="https://www.ghu.life" target="_blank">GHU</a></li>
-    </ul>
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Generador de Contraseñas Temáticas IA</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="tematic.css">
+    </head>
+    <body>
+        <nav class="blue darken-3">
+            <div class="nav-wrapper container">
+                <div class="language-selector left">
+                    <a href="index.html" id="es-lang">ES</a>
+                    <a href="index_eng.html" id="en-lang">ENG</a>
+                </div>
+                <ul class="left hide-on-med-and-down">
+                    <li><a href="/">Generador Clásico</a></li>
+                    <li><a href="/tematic.html">Generador IA</a></li>
+                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown-proyectos">
+                        Otros Proyectos<i class="material-icons right">arrow_drop_down</i>
+                    </a></li>
+                </ul>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>
+        <!-- Menú móvil -->
+        <ul class="sidenav" id="mobile-demo">
+            <li><div class="language-selector">
+                <a href="index.html" id="es-lang-mobile">ES</a>
+                <a href="index_eng.html" id="en-lang-mobile">ENG</a>
+            </div></li>
+            <li><a href="/">Generador Clásico</a></li>
+            <li><a href="/tematic.html">Generador IA</a></li>
+            <li><a class="dropdown-trigger" href="#!" data-target="dropdown-proyectos-mobile">
+                Otros Proyectos<i class="material-icons right">arrow_drop_down</i>
+            </a></li>
+        </ul>
+        <!-- Dropdown Structure -->
+        <ul id="dropdown-proyectos" class="dropdown-content">
+            <li><a href="https://www.ghu.life" target="_blank">GHU</a></li>
+        </ul>
+        <!-- Dropdown Structure para móvil -->
+        <ul id="dropdown-proyectos-mobile" class="dropdown-content">
+            <li><a href="https://www.ghu.life" target="_blank">GHU</a></li>
+        </ul>
 
     <main class="container">
         <div class="row">

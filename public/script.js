@@ -103,7 +103,7 @@ async function generatePassword() {
     if (useNumbers) charset += '0123456789';
     if (useSymbols) charset += '!@#$%^&*';
     if (useBrackets) charset += '[]{}()';
-    if (useHighAnsi) charset += '±¥µç';
+    if (useHighAnsi) charset += '±¥µç|~¬<>¿?';
 
     if (charset === '' && !useWords) {
         document.getElementById('generated-password').textContent = 'SIN CONTRASEÑA GENERADA';
